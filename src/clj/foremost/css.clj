@@ -4,10 +4,11 @@
             [garden.units :refer [vw vh rem px]]
             [garden.color :refer [rgba]]))
 
-(def grey (rgba 230 230 230 1))
-(def red (rgba 200 0 0 1))
-(def black (rgba 0 0 0 1))
+(def grey (rgba 194 204 203 1))
+(def red (rgba 230 0 111 1))
+(def black (rgba 44 46 33 1))
 (def white (rgba 255 255 255 1))
+(def blue (rgba 81 83 61 1))
 
 (defstyles screen
   [:html {:font-size (px 12)}]
@@ -21,14 +22,14 @@
      :height "100vh"}]
    [:&>div>div>header
     {:position "fixed"
-     :height (rem 2)
+     :height (rem 4)
      :top (rem 1)
      :left (rem 1)
      :width "calc(100vw - 2rem)"
      :display "flex"
      :justify-content "space-between"
      :z-index 3
-     :opacity 0.2}
+     :opacity 0}
     [:&:hover {:opacity 1}]
     [:nav
      {:display "flex"
@@ -38,8 +39,10 @@
        :border-radius (rem 2)
        :padding [[(rem 0.35) (rem 1.5) (rem 0.45)]]
        :margin [[(rem 0.5) (rem 0.5)]]
-       :background white
-       :font-size (rem 2)}]
+       :background blue
+       :color white
+       :font-size (rem 2)
+       :font-weight 900}]
      [:input
       {:font-size (rem 2)
        :width (rem 2)
@@ -48,7 +51,9 @@
        :border "none"}]]]
    [:main
     {:position "absolute"
-     :display "flex"}
+     :display "flex"
+     :transition-property "transform"
+     :transition-duration "250ms"}
     [:section
      {:display "flex"
       :flex-direction "column"
@@ -60,17 +65,21 @@
      [:header :h1 :h2 :ul
       {:margin-left "auto"
        :margin-right "auto"}]
+     [:h1 :h2 {:font-family "Hrot"}]
      [:h1
       {:font-size (rem 8)
        :font-weight 900
-       :color "blue"}]
+       :color red}]
      [:h2
       {:font-size (rem 4)
-       :font-weight 900}]
+       :font-weight 700
+       :color blue}]
      [:ul {:margin [[(rem 2) "auto"]]
-           :font-size (rem 4)
-           :text-align "left"}
-      [:li {:margin-bottom (rem 2)}]]]]
+           :font-size (rem 6)
+           :text-align "left"
+           :list-style "none"}
+      [:li {:margin-bottom (rem 3)}
+       [:sup {:font-size (rem 2)}]]]]]
    [:footer
     {:position "fixed"
      :bottom (rem 1)
