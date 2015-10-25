@@ -1,13 +1,24 @@
 (ns foremost.subs
     (:require-macros [reagent.ratom :refer [reaction]])
-    (:require [re-frame.core :as re-frame]))
+    (:require [re-frame.core :as re-frame :refer [register-sub]]))
 
-(re-frame/register-sub
+(register-sub
  :name
  (fn [db]
    (reaction (:name @db))))
 
-(re-frame/register-sub
+(register-sub
  :active-panel
  (fn [db _]
    (reaction (:active-panel @db))))
+
+
+(register-sub
+ :current-slide
+  (fn [db _]
+    (reaction (:current-slide @db))))
+
+(register-sub
+ :slides-count
+  (fn [db _]
+    (reaction (:slides-count @db))))
