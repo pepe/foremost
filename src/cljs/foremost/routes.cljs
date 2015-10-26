@@ -23,7 +23,8 @@
     (re-frame/dispatch [:set-active-panel :about-panel]))
 
   (defroute "/day/:day" [day]
-    (re-frame/dispatch [:set-active-panel (keyword day)]))
+    (re-frame/dispatch [:set-active-panel :day])
+    (re-frame/dispatch [:set-active-day (keyword day)]))
 
 
   ;; --------------------

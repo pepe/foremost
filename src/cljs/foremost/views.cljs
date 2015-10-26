@@ -24,12 +24,102 @@
           (recur))))))
 
 ;; --------------------
-(defn home-panel []
+;; Slides
+(def ama-slide
+ [:section
+   [:h2 "Fun & Play"]
+   [:h1 "&"]
+   [:h2 "Ask Me Anything"]])
+
+(def slides
+  {:monday
+   [:div#slides
+    [:section
+     [:h2 "Contemporary"]
+     [:h1 "Front-End"]
+     [:h2 "Development"]]
+    [:section
+     [:h1 "Who am I?"]
+     [:ul
+      [:li
+       "2"
+       [:sup "nd"]
+       " company in 15+ yrs"]
+      [:li "Web and Typography"]
+      [:li "@pepe on GitHub"]]]
+    [:section
+      [:h1 "Who are you?"]
+      [:ul
+       [:li "Name & Origin"]
+       [:li "Engagement & Experience"]
+       [:li "Groups"]]]
+    [:section
+     [:h1 "Organization"]
+     [:ul
+      [:li "From Day to Day"]
+      [:li "Daily Tasks Triad (60%)"]
+      [:li "Project (40%)"]]]
+    [:section
+     [:h1 "What's in Monday"]
+     [:ul
+      [:li "HTML - 5, Boilerplates, Generators"]
+      [:li "CSS - 3, Preprocessors"]
+      [:li "JS - ES7, Transpilers"]]]
+    [:section
+     [:header
+      [:h1 "Start small"]
+      [:h2 "Daily Tasks Triad"]]
+     [:ul
+      [:li "Create GitHub account"]
+      [:li "Follow @pepe"]
+      [:li "Star one related project"]]]
+    ama-slide]
+   :tuesday
+   [:div#slides
+    [:section
+     [:h1 "More about @pepe"]
+     [:h2 "damnpepe @ twitter / mixcloud"]
+     [:h2 "Feel free to folow me."]]
+   [:section
+    [:h1 "More organization"]
+    [:h2 "Design vs Code"]
+    [:h2 "Work on Weekdays"]]
+    [:section
+     [:h1 "More tooling"]
+     [:h2 "Atom editor"]]
+    [:section
+     [:h1 "Bootstrap"]
+     [:h2 "and some more"]]
+    [:section
+     [:h1 "Frameworks"]
+     [:ul
+      [:li "Ember.js"]
+      [:li "Angular.js"]
+      [:li "React.js"]]]
+    ama-slide
+    [:section
+     [:h1 "Here are dragons!"]]]})
+
+;; --------------------
+;; Components
+(defn footer [with-slides]
+  (let [slide (subscribe [:current-slide])
+               slides-count (subscribe [:slides-count])
+               active-day (subscribe [:active-day])]
+    [:footer
+     (when with-slides [:div (str "(" (inc @slide) "/" @slides-count")")])
+     [:div
+      [:a {:href "#/day/monday"} "Monday"]]
+     [:div
+      [:a {:href "#/day/tuesday"} "Tuesday"]]]))
+
+(defn day-panel []
   (listen!)
   (let [name (subscribe [:name])]
     (fn []
       (let [slide (subscribe [:current-slide])
-            slides-count (subscribe [:slides-count])]
+            slides-count (subscribe [:slides-count])
+            active-day (subscribe [:active-day])]
        [:div
         [:header
          [:span @name]
@@ -51,50 +141,21 @@
         [:main
          {:style {:width (str @slides-count "00vw")
                   :transform (str "translateX(-" @slide "00vw)")}}
-         [:section
-          [:h2 "Contemporary"]
-          [:h1 "Front-End"]
-          [:h2 "Development"]]
-         [:section
-          [:h1 "Who am I?"]
-          [:ul
-           [:li
-            "2"
-            [:sup "nd"]
-            " company in 15+ yrs"]
-           [:li "Web and Typography"]
-           [:li "@pepe on GitHub"]]]
-         [:section
-           [:h1 "Who are you?"]
-           [:ul
-            [:li "Name & Origin"]
-            [:li "Engagement & Experience"]
-            [:li "Groups"]]]
-         [:section
-          [:h1 "Organization"]
-          [:ul
-           [:li "From Day to Day"]
-           [:li "Daily Tasks Triad (60%)"]
-           [:li "Project (40%)"]]]
-         [:section
-          [:h1 "What's in Monday"]
-          [:ul
-           [:li "HTML - 5, Boilerplates, Generators"]
-           [:li "CSS - 3, Preprocessors"]
-           [:li "JS - ES7, Transpilers"]]]
-         [:section
-          [:header
-           [:h1 "Start small"]
-           [:h2 "Daily Tasks Triad"]]
-          [:ul
-           [:li "Create GitHub account"]
-           [:li "Follow @pepe"]
-           [:li "Star one related project"]]]
-         [:section
-          [:h2 "Fun & Play"]
-          [:h1 "&"]
-          [:h2 "Ask Me Anything"]]]
-        [:footer (str "(" (inc @slide) "/" @slides-count")")]]))))
+         (get slides @active-day)]
+        [footer true]]))))
+
+(defn home-panel []
+  (let [name (subscribe [:name])]
+    [:div
+      [:header
+       [:span @name]
+       [:strong "Josef Pospíšil"]]
+      [:main
+       [:section
+        [:h2 "Contemporary"]
+        [:h1 "Front-End"]
+        [:h2 "Development"]]]
+      [footer false]]))
 
 (defn about-panel []
   (fn []
@@ -107,7 +168,7 @@
 ;; --------------------
 (defmulti panels identity)
 (defmethod panels :home-panel [] [home-panel])
-(defmethod panels :monday [] [home-panel])
+(defmethod panels :day [] [day-panel])
 (defmethod panels :about-panel [] [about-panel])
 (defmethod panels :default [] [:div])
 

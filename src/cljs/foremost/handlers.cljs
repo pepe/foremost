@@ -19,7 +19,7 @@
     (let [slides-count (subscribe [:slides-count])]
       (if (> @slides-count (inc slide) )
         (inc slide)
-        (slide)))))
+        slide))))
 
 (register-handler
  :previous-slide
@@ -40,3 +40,8 @@
         (< new-slide 1) 1
         :else (dec new-slide)))))
 
+(register-handler
+ :set-active-day
+  (path :active-day)
+  (fn [_ [_ new-active-day]]
+    new-active-day))

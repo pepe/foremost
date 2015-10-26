@@ -13,6 +13,7 @@
 (defstyles screen
   [:html {:font-size (px 12)}]
   [:body {:font-family "Vegan Sans, sans-serif"
+          :font-weight 800
           :background-color grey
           :color black
           :margin 0
@@ -51,9 +52,9 @@
        :border "none"}]]]
    [:main
     {:position "absolute"
-     :display "flex"
      :transition-property "transform"
      :transition-duration "250ms"}
+    [:&>div {:display "flex"}]
     [:section
      {:display "flex"
       :flex-direction "column"
@@ -65,14 +66,14 @@
      [:header :h1 :h2 :ul
       {:margin-left "auto"
        :margin-right "auto"}]
-     [:h1 :h2 {:font-family "Hrot"}]
+     [:h1 :h2 {:font-family "Hrot, sans-serif"}]
      [:h1
       {:font-size (rem 8)
-       :font-weight 900
+       :font-weight 200
        :color red}]
      [:h2
       {:font-size (rem 4)
-       :font-weight 700
+       :font-weight 200
        :color blue}]
      [:ul {:margin [[(rem 2) "auto"]]
            :font-size (rem 6)
@@ -81,7 +82,10 @@
       [:li {:margin-bottom (rem 3)}
        [:sup {:font-size (rem 2)}]]]]]
    [:footer
-    {:position "fixed"
+    {:display "flex"
+     :position "fixed"
      :bottom (rem 1)
-     :right (rem 1)}]]
+     :right (rem 1)
+     :width "30vw"
+     :justify-content "space-between"}]]
 )

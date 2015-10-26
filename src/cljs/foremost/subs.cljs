@@ -22,3 +22,8 @@
  :slides-count
   (fn [db _]
     (reaction (:slides-count @db))))
+
+(register-sub
+ :active-day
+  (fn [db _]
+    (reaction (:active-day @db))))
