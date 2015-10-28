@@ -116,19 +116,22 @@
      [:h1 "Thank you"]
      [:h2 "For your input and patience"]]
     [:section
+     [:h1 "Some more internets"]
+     [:h2 "Medium"]]
+    [:section
      [:h1 "Some designing"]
      [:h2 "Pencil first. Pixel later."]
      [:h2 "Sketch"]]
     [:section
-     [:h1 "More organization"]
-     [:h2 "Help on project"]
-     [:h2 "Wild ninja live coding"]]
-    [:section
      [:h1 "Middleman publishing"]
      [:h2 "GitHub pages"]
      [:h2 "Static server"]]
+    [:section
+     [:h1 "More organization"]
+     [:h2 "Help on project"]
+     [:h2 "Wild ninja live coding"]]
+
      ama-slide
-     dragon-slide
      dragon-slide]})
 
 ;; --------------------
