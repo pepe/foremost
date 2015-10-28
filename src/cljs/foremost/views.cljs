@@ -32,6 +32,12 @@
    [:h1 "&"]
    [:h2 "Ask Me Anything"]])
 
+(def dragon-slide
+ [:section
+   [:h2 "Here may be"]
+   [:h1 "Dragons"]
+   [:h2 "Beware!"]])
+
 (def slides
   {:monday
    [:div#slides
@@ -92,14 +98,38 @@
      [:h1 "Bootstrap"]
      [:h2 "and some more"]]
     [:section
-     [:h1 "Frameworks"]
+     [:h1
+      {:style
+       {:text-decoration "line-through"}}
+      "Frameworks"]
      [:ul
       [:li "Ember.js"]
       [:li "Angular.js"]
       [:li "React.js"]]]
-    ama-slide
     [:section
-     [:h1 "Here are dragons!"]]]})
+     [:h1 "Middleman"]
+     [:h2 "On popular demand"]]
+    ama-slide]
+   :thursday
+   [:div#slides
+    [:section
+     [:h1 "Thank you"]
+     [:h2 "For your input and patience"]]
+    [:section
+     [:h1 "Some designing"]
+     [:h2 "Pencil first. Pixel later."]
+     [:h2 "Sketch"]]
+    [:section
+     [:h1 "More organization"]
+     [:h2 "Help on project"]
+     [:h2 "Wild ninja live coding"]]
+    [:section
+     [:h1 "Middleman publishing"]
+     [:h2 "GitHub pages"]
+     [:h2 "Static server"]]
+     ama-slide
+     dragon-slide
+     dragon-slide]})
 
 ;; --------------------
 ;; Components
