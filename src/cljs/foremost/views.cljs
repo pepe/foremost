@@ -1,6 +1,7 @@
 (ns foremost.views
   (:require-macros [cljs.core.async.macros :refer [go-loop]])
   (:require [cljs.core.async :refer [chan <! put!]]
+            [clojure.string :refer [capitalize]]
             [goog.events :as events]
             [goog.events.EventType :as EventType]
             [re-frame.core :as re-frame :refer [subscribe dispatch]]))
@@ -107,11 +108,11 @@
                slides-count (subscribe [:slides-count])
                active-day (subscribe [:active-day])]
     [:footer
-     (when with-slides [:div (str "(" (inc @slide) "/" @slides-count")")])
-     [:div
-      [:a {:href "#/day/monday"} "Monday"]]
-     [:div
-      [:a {:href "#/day/tuesday"} "Tuesday"]]]))
+     (for [day (keys slides)]
+       ^{:key day}
+       [:div
+        [:a {:href (str "#/day/" (name day))} (capitalize (name day))]])
+     (when with-slides [:div (str "(" (inc @slide) "/" @slides-count")")])]))
 
 (defn day-panel []
   (listen!)
