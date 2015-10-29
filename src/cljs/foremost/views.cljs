@@ -130,8 +130,20 @@
      [:h1 "More organization"]
      [:h2 "Help on project"]
      [:h2 "Wild ninja live coding"]]
-
      ama-slide
+     dragon-slide]
+   :friday
+   [:div#slides
+    [:section
+     [:h1 "Live coding"]
+     [:h2 "Ninja style"]]
+    [:section
+     [:h1 "It is here"]
+     [:h1 "have no fear"]]
+     ama-slide
+     dragon-slide
+     dragon-slide
+     dragon-slide
      dragon-slide]})
 
 ;; --------------------
@@ -153,30 +165,35 @@
     (fn []
       (let [slide (subscribe [:current-slide])
             slides-count (subscribe [:slides-count])
-            active-day (subscribe [:active-day])]
-       [:div
-        [:header
-         [:span @name]
-         [:strong "Josef Pospíšil"]
-         [:nav
-          [:button.prev
-           {:on-click #(dispatch [:previous-slide])
-            :disabled (when (= @slide 0) "disabled")}
-           (char 8592)]
-          [:input
-           {:type "text"
-            :placeholder (inc @slide)
-            :value nil
-            :on-change #(dispatch [:slide-changed (-> % .-target .-value)])}]
-          [:button.next
-           {:on-click #(dispatch [:next-slide])
-            :disabled (when (= @slide (dec @slides-count)) "disabled")}
-           (char 8594)]]]
-        [:main
-         {:style {:width (str @slides-count "00vw")
-                  :transform (str "translateX(-" @slide "00vw)")}}
-         (get slides @active-day)]
-        [footer true]]))))
+            active-day (subscribe [:active-day])
+            prev-arrow (char 8592)
+            next-arrow (char 8594)
+            ]
+        (.log js/console @active-day)
+        [:div
+         [:header
+          [:span @name]
+          [:strong "Josef Pospíšil"]
+          [:nav
+           [:button.prev
+            {:on-click #(dispatch [:previous-slide])
+             :disabled (when (= @slide 0) "disabled")}
+            prev-arrow
+            ]
+           [:input
+            {:type "text"
+             :placeholder (inc @slide)
+             :value nil
+             :on-change #(dispatch [:slide-changed (-> % .-target .-value)])}]
+           [:button.next
+            {:on-click #(dispatch [:next-slide])
+             :disabled (when (= @slide (dec @slides-count)) "disabled")}
+            next-arrow]]]
+         [:main
+          {:style {:width (str @slides-count "00vw")
+                   :transform (str "translateX(-" @slide "00vw)")}}
+          (get slides @active-day)]
+         [footer true]]))))
 
 (defn home-panel []
   (let [name (subscribe [:name])]

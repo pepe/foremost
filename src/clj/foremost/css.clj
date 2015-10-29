@@ -42,6 +42,7 @@
        :margin [[(rem 0.5) (rem 0.5)]]
        :background blue
        :color white
+       :opacity 0.5
        :font-size (rem 2)
        :font-weight 900}]
      [:input
@@ -73,7 +74,7 @@
        :color red}]
      [:h2
       {:font-size (rem 4)
-       :font-weight 200
+       :font-weight 500
        :color blue}]
      [:ul {:margin [[(rem 2) "auto"]]
            :font-size (rem 6)
