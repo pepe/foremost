@@ -135,14 +135,18 @@
    :friday
    [:div#slides
     [:section
+     [:h1 "Maybe the last internets"]
+     [:h2 "Squarespace"]]
+    [:section
+     [:h1 "What "]
+     [:h1 "I actually did?"]]
+    [:section
      [:h1 "Live coding"]
      [:h2 "Ninja style"]]
     [:section
      [:h1 "It is here"]
      [:h1 "have no fear"]]
      ama-slide
-     dragon-slide
-     dragon-slide
      dragon-slide
      dragon-slide]})
 
@@ -169,7 +173,6 @@
             prev-arrow (char 8592)
             next-arrow (char 8594)
             ]
-        (.log js/console @active-day)
         [:div
          [:header
           [:span @name]
