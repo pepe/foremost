@@ -8,7 +8,7 @@
 
 (defn- keypress-chan-events []
   (let [c (chan 1)]
-    (events/listen js/window EventType/KEYPRESS #(put! c %))
+    (events/listen js/window EventType/KEYDOWN #(put! c %))
     c))
 
 (defonce listening false)
@@ -20,8 +20,9 @@
       (go-loop []
         (let [key (<! chan)
               code (-> key .-event_ .-keyCode)]
-          (when (contains? #{108 13 32} code) (dispatch [:next-slide]))
-          (when (= code 104) (dispatch [:previous-slide]))
+          (.log js/console code)
+          (when (contains? #{108 13 32 39 40} code) (dispatch [:next-slide]))
+          (when (contains? #{104 37 38} code ) (dispatch [:previous-slide]))
           (recur))))))
 
 ;; --------------------
