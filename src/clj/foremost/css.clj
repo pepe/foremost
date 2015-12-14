@@ -2,13 +2,13 @@
   (:refer-clojure :exclude [+ - * / rem])
   (:require [garden.def :refer [defstyles]]
             [garden.units :refer [vw vh rem px]]
-            [garden.color :refer [rgba]]))
+            [garden.color :refer [hsla rgba]]))
 
-(def grey (rgba 194 204 203 1))
-(def red (rgba 230 0 111 1))
-(def black (rgba 44 46 33 1))
+(def grey (hsla 252 2 36 1))
+(def red (hsla 349 41 99 1))
+(def black (hsla 177 100 8 1))
 (def white (rgba 255 255 255 1))
-(def blue (rgba 81 83 61 1))
+(def blue (hsla 210 97 57 1))
 
 (defstyles screen
   [:html {:font-size (px 12)}]
