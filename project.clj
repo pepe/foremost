@@ -1,11 +1,10 @@
 (defproject foremost "0.2.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.145"]
-                 [binaryage/devtools "0.4.0"]
                  [reagent "0.5.1"]
-                 [re-frame "0.4.1"]
+                 [re-frame "0.6.0"]
                  [secretary "1.2.3"]
-                 [garden "1.2.5"]]
+                 [garden "1.3.0"]]
 
   :source-paths ["src/clj"]
 
