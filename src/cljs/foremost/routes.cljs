@@ -22,10 +22,9 @@
   (defroute "/about" []
     (re-frame/dispatch [:set-active-panel :about-panel]))
 
-  (defroute "/day/:day" [day]
-    (re-frame/dispatch [:set-active-panel :day])
-    (re-frame/dispatch [:set-active-day (keyword day)]))
-
+  (defroute "/slides/:slides" [slides]
+    (re-frame/dispatch [:set-active-panel :slides])
+    (re-frame/dispatch [:set-active-slides (keyword slides)]))
 
   ;; --------------------
   (hook-browser-navigation!))

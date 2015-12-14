@@ -20,7 +20,6 @@
       (go-loop []
         (let [key (<! chan)
               code (-> key .-event_ .-keyCode)]
-          (.log js/console code)
           (when (contains? #{108 13 32 39 40} code) (dispatch [:next-slide]))
           (when (contains? #{104 37 38} code ) (dispatch [:previous-slide]))
           (recur))))))
@@ -164,16 +163,15 @@
         [:a {:href (str "#/day/" (name day))} (capitalize (name day))]])
      (when with-slides [:div (str "(" (inc @slide) "/" @slides-count")")])]))
 
-(defn day-panel []
+(defn slides-panel []
   (listen!)
   (let [name (subscribe [:name])]
     (fn []
       (let [slide (subscribe [:current-slide])
             slides-count (subscribe [:slides-count])
-            active-day (subscribe [:active-day])
+            active-slides (subscribe [:active-slides])
             prev-arrow (char 8592)
-            next-arrow (char 8594)
-            ]
+            next-arrow (char 8594)]
         [:div
          [:header
           [:span @name]
@@ -196,7 +194,7 @@
          [:main
           {:style {:width (str @slides-count "00vw")
                    :transform (str "translateX(-" @slide "00vw)")}}
-          (get slides @active-day)]
+          (get slides @active-slides)]
          [footer true]]))))
 
 (defn home-panel []
@@ -223,7 +221,7 @@
 ;; --------------------
 (defmulti panels identity)
 (defmethod panels :home-panel [] [home-panel])
-(defmethod panels :day [] [day-panel])
+(defmethod panels :slides [] [slides-panel])
 (defmethod panels :about-panel [] [about-panel])
 (defmethod panels :default [] [:div])
 

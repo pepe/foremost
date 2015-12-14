@@ -34,14 +34,13 @@
   (path :current-slide)
   (fn [slide [_ new-slide]]
     (let [slides-count (subscribe [:slides-count])]
-      (.log js/console new-slide @slides-count)
       (cond
         (> new-slide @slides-count) (dec @slides-count)
         (< new-slide 1) 1
         :else (dec new-slide)))))
 
 (register-handler
- :set-active-day
-  (path :active-day)
-  (fn [_ [_ new-active-day]]
-    new-active-day))
+ :set-active-slides
+  (path :active-slides)
+  (fn [_ [_ new-active-slides]]
+    new-active-slides))
